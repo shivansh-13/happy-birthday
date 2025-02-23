@@ -24,9 +24,18 @@ const fetchData = () => {
       });
     });
 };
+
 const playBackgroundMusic = () => {
   const bgMusic = document.getElementById("bg-music");
-  bgMusic.play();
+  bgMusic.play().then(() => {
+    console.log('Music is playing');
+  }).catch(error => {
+    console.log('Autoplay was prevented:', error);
+  });
+};
+const startExperience = () => {
+  fetchData();
+  playBackgroundMusic();
 };
 
 // Animation Timeline
@@ -308,4 +317,7 @@ const animationTimeline = () => {
 };
 
 // Run fetch and animation in sequence
-fetchData();
+document.getElementById('start-button').addEventListener('click', () => {
+  document.getElementById('start-button').style.display = 'none';
+  startExperience();
+});
